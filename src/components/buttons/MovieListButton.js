@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
   ratingContainer: {
     flex: 6,
     justifyContent: 'center',
-    borderBottomColor: colors.lightGrey,
+    borderBottomColor: colors.lightGrey2,
     borderBottomWidth: 0.2
   },
   counterContainer: {
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
   movieContainer: {
     flex: 17,
     justifyContent: 'center',
-    borderBottomColor: colors.lightGrey,
+    borderBottomColor: colors.lightGrey2,
     borderBottomWidth: 0.2
   },
   movieName: {
@@ -107,6 +107,7 @@ const styles = StyleSheet.create({
     fontSize: 16
   },
   openDate: {
-    color: colors.white
+    color: colors.lightGrey1,
+    fontSize: 13
   }
 })
