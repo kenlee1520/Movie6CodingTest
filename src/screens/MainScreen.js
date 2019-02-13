@@ -8,20 +8,22 @@ import {
   ScrollView
 } from 'react-native'
 import axios from 'axios'
-// import Icon from 'react-native-vector-icons/FontAwesome'
+import RatingBadge from '../components/RatingBadge'
+import IconCounter from '../components/IconCounter'
 
 export default class MainScreen extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      data: ''
+      movieList: ''
     }
   }
 
   componentDidMount () {
-    axios.get('')
+    axios.get('https://api.hkmovie6.com/hkm/movies?type=showing')
       .then(response => {
         console.log(response.data)
+        this.setState({ movieList: response.data })
       })
       .catch(error => {
         console.log(error)
