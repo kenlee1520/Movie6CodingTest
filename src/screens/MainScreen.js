@@ -4,12 +4,10 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableOpacity,
   ScrollView
 } from 'react-native'
 import axios from 'axios'
-import RatingBadge from '../components/RatingBadge'
-import IconCounter from '../components/IconCounter'
+import MovieListButton from '../components/buttons/MovieListButton'
 
 export default class MainScreen extends Component {
   constructor (props) {
@@ -35,12 +33,10 @@ export default class MainScreen extends Component {
     return (
       <View style={styles.wrapper}>
         <View style={styles.headerContainer}>
-          <Text>電影</Text>
+          <Text style={styles.headerText}>電影</Text>
         </View>
         <ScrollView style={styles.contentContainer}>
-          <TouchableOpacity>
-            <Text>click me</Text>
-          </TouchableOpacity>
+          <Text style={styles.headerText}>電影</Text>
         </ScrollView>
       </View>
     )
@@ -60,5 +56,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  headerText: {
+    fontSize: 15,
+    color: colors.white
   }
 })

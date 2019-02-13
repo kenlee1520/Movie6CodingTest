@@ -19,7 +19,9 @@ export default class IconCounter extends Component {
         <View style={styles.iconContainer}>
           <Icon
             name={icon}
+            size={17}
             color={colors.white}
+            style={styles.icon}
           />
         </View>
         <View style={styles.countContainer}>
@@ -38,15 +40,23 @@ IconCounter.propTypes = {
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
-    flexDirection: 'column'
+    flexDirection: 'row'
   },
   iconContainer: {
-    flex: 1
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  icon: {
+    fontWeight: 'bold'
   },
   countContainer: {
-    flex: 2
+    flex: 3,
+    justifyContent: 'center'
   },
   counterText: {
-    color: colors.yellow
+    color: colors.yellow,
+    fontWeight: 'bold',
+    fontSize: 15
   }
 })

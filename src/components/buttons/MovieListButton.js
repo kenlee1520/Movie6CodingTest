@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import colors from '../styles/colors'
+import { PropTypes } from 'prop-types'
+import colors from '../../styles/colors'
 import {
   TouchableOpacity,
   StyleSheet,
@@ -8,8 +8,8 @@ import {
   View,
   Image
 } from 'react-native'
-import RatingBadge from './RatingBadge'
-import IconCounter from './IconCounter'
+import RatingBadge from '../RatingBadge'
+import IconCounter from '../IconCounter'
 
 export default class MovieListButton extends Component {
   render () {
@@ -20,7 +20,7 @@ export default class MovieListButton extends Component {
       favCount,
       commentCount,
       openDate,
-      isShowPromoIcon,
+      // isShowPromoIcon,
       navigate
     } = this.props
     return (
@@ -29,9 +29,7 @@ export default class MovieListButton extends Component {
         onPress={navigate}
       >
         <View style={styles.thumbnailContainer}>
-          <Image
-            source={{ uri: { thumbnail } }}
-          />
+          <Text style={{ color: colors.white }}>thumbnail</Text>
         </View>
         <View style={styles.ratingContainer}>
           <RatingBadge
@@ -40,14 +38,16 @@ export default class MovieListButton extends Component {
         </View>
         <View style={styles.movieContainer}>
           <Text style={styles.movieName}>{movieName}</Text>
-          <IconCounter
-            icon={'heart-o'}
-            count={favCount}
-          />
-          <IconCounter
-            icon={'comment-o'}
-            count={commentCount}
-          />
+          <View style={styles.counterContainer}>
+            <IconCounter
+              icon={'heart-o'}
+              count={favCount}
+            />
+            <IconCounter
+              icon={'comment-o'}
+              count={commentCount}
+            />
+          </View>
           <Text style={styles.openDate}>{openDate}</Text>
         </View>
       </TouchableOpacity>
@@ -55,34 +55,47 @@ export default class MovieListButton extends Component {
   }
 }
 
+// <Image
+//   source={{ uri: thumbnail }}
+//   style={{ width: 300, height: 300 }}
+// />
+
 MovieListButton.propTypes = {
   thumbnail: PropTypes.string,
   ratingValue: PropTypes.number,
-  movieName: PropTypes.string.isRequired,
+  movieName: PropTypes.string,
   favCount: PropTypes.number,
   commentCount: PropTypes.number,
   openDate: PropTypes.string,
-  isShowPromoIcon: PropTypes.bool.isRequired,
-  navigate: PropTypes.func.isRequired
+  // isShowPromoIcon: PropTypes.bool.isRequired,
+  navigate: PropTypes.func
 }
 
 const styles = StyleSheet.create({
   wrapper: {
-    flex: 1,
-    flexDirection: 'column',
+    flexDirection: 'row',
     backgroundColor: colors.black
   },
   thumbnailContainer: {
-    flex: 1
+    flex: 5,
+    backgroundColor: '#53ecad'
   },
   ratingContainer: {
-    flex: 1
+    flex: 6,
+    backgroundColor: '#5dfb4f'
+  },
+  counterContainer: {
+    width: 160,
+    flexDirection: 'row'
   },
   movieContainer: {
-    flex: 3
+    flex: 17,
+    justifyContent: 'center'
   },
   movieName: {
-    color: colors.white
+    color: colors.white,
+    fontWeight: 'bold',
+    fontSize: 16
   },
   openDate: {
     color: colors.white
