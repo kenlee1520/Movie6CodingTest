@@ -29,7 +29,10 @@ export default class MovieListButton extends Component {
         onPress={navigate}
       >
         <View style={styles.thumbnailContainer}>
-          <Text style={{ color: colors.white }}>thumbnail</Text>
+          <Image
+            source={{ uri: thumbnail }}
+            style={styles.thumbnail}
+          />
         </View>
         <View style={styles.ratingContainer}>
           <RatingBadge
@@ -55,11 +58,6 @@ export default class MovieListButton extends Component {
   }
 }
 
-// <Image
-//   source={{ uri: thumbnail }}
-//   style={{ width: 300, height: 300 }}
-// />
-
 MovieListButton.propTypes = {
   thumbnail: PropTypes.string,
   ratingValue: PropTypes.number,
@@ -77,12 +75,16 @@ const styles = StyleSheet.create({
     backgroundColor: colors.black
   },
   thumbnailContainer: {
-    flex: 5,
-    backgroundColor: '#53ecad'
+    flex: 5
+  },
+  thumbnail: {
+    height: 110
   },
   ratingContainer: {
     flex: 6,
-    backgroundColor: '#5dfb4f'
+    justifyContent: 'center',
+    borderBottomColor: colors.white,
+    borderBottomWidth: 0.2
   },
   counterContainer: {
     width: 160,
@@ -90,7 +92,9 @@ const styles = StyleSheet.create({
   },
   movieContainer: {
     flex: 17,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    borderBottomColor: colors.white,
+    borderBottomWidth: 0.2
   },
   movieName: {
     color: colors.white,

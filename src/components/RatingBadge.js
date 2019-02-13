@@ -43,7 +43,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column'
   },
   ratingContainer: {
-    justifyContent: 'center',
     alignItems: 'center'
   },
   ratingText: {
@@ -53,8 +52,6 @@ const styles = StyleSheet.create({
   },
   ratingBar: {
     color: colors.yellow,
-    flex: 1,
-    justifyContent: 'center',
     alignItems: 'center'
   }
 })
