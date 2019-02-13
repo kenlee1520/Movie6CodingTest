@@ -6,7 +6,7 @@ import {
   Text,
   View
 } from 'react-native'
-import { Rating } from 'react-native-ratings'
+import StarRating from 'react-native-star-rating'
 
 export default class RatingBadge extends Component {
   render () {
@@ -15,15 +15,18 @@ export default class RatingBadge extends Component {
     } = this.props
     return (
       <View style={styles.wrapper}>
-        <View style={styles.ratingText}>
-          <Text>{ratingValue}</Text>
+        <View style={styles.ratingContainer}>
+          <Text style={styles.ratingText}>{ratingValue}</Text>
         </View>
         <View style={styles.ratingBar}>
-          <Rating
-            ratingCount={ratingValue}
-            imageSize={60}
-            showRating
-            onFinishRating={this.ratingCompleted}
+          <StarRating
+            disabled={true}
+            maxStars={5}
+            rating={3.5}
+            emptyStarColor={colors.yellow}
+            halfStar={'star-half-full'}
+            fullStarColor={colors.yellow}
+            starSize={12}
           />
         </View>
       </View>
@@ -37,12 +40,21 @@ RatingBadge.propTypes = {
 
 const styles = StyleSheet.create({
   wrapper: {
-    flexDirection: 'row'
+    flexDirection: 'column'
+  },
+  ratingContainer: {
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   ratingText: {
+    fontSize: 35,
+    fontWeight: 'bold',
     color: colors.yellow
   },
   ratingBar: {
-    color: colors.yellow
+    color: colors.yellow,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 })
