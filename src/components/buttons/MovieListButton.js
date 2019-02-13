@@ -34,6 +34,7 @@ export default class MovieListButton extends Component {
             style={styles.thumbnail}
           />
         </View>
+        <View style={{ flex: 1 }} />
         <View style={styles.ratingContainer}>
           <RatingBadge
             ratingValue={ratingValue}
