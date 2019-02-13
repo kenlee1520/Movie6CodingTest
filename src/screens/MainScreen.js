@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.black
   },
   headerContainer: {
-    height: 55,
+    height: 100,
     backgroundColor: colors.darkGrey,
     flexDirection: 'row',
     justifyContent: 'center',

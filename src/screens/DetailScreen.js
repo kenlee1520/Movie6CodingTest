@@ -5,7 +5,8 @@ import {
   Text,
   View,
   TouchableOpacity,
-  ScrollView
+  ScrollView,
+  WebView
 } from 'react-native'
 import axios from 'axios'
 import RatingBadge from '../components/RatingBadge'
@@ -20,7 +21,7 @@ export default class DetailScreen extends Component {
   }
 
   componentDidMount () {
-    axios.get('https://api.hkmovie6.com/hkm/movies/' + this.props.navigation.getParam('movieId'))
+    axios.get('https://api.hkmovie6.com/hkm/movies/48853')
       .then(response => {
         console.log(response.data)
         this.setState({ movieDetail: response.data })
@@ -37,11 +38,9 @@ export default class DetailScreen extends Component {
         <View style={styles.headerContainer}>
           <Text>電影資訊</Text>
         </View>
-        <ScrollView style={styles.contentContainer}>
-          <TouchableOpacity>
-            <Text>click me</Text>
-          </TouchableOpacity>
-        </ScrollView>
+        <WebView
+          source={{ uri: 'https://www.youtube.com/watch?v=rAE6KFVfoLg' }}
+        />
       </View>
     )
   }
