@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import colors from '../styles/colors'
 import {
+  TouchableOpacity,
   StyleSheet,
   Text,
   View,
@@ -19,10 +20,14 @@ export default class MovieListButton extends Component {
       favCount,
       commentCount,
       openDate,
-      isShowPromoIcon
+      isShowPromoIcon,
+      navigate
     } = this.props
     return (
-      <View style={styles.wrapper}>
+      <TouchableOpacity
+        style={styles.wrapper}
+        onPress={navigate}
+      >
         <View style={styles.thumbnailContainer}>
           <Image
             source={{ uri: { thumbnail } }}
@@ -45,7 +50,7 @@ export default class MovieListButton extends Component {
           />
           <Text style={styles.openDate}>{openDate}</Text>
         </View>
-      </View>
+      </TouchableOpacity>
     )
   }
 }
@@ -57,7 +62,8 @@ MovieListButton.propTypes = {
   favCount: PropTypes.number,
   commentCount: PropTypes.number,
   openDate: PropTypes.string,
-  isShowPromoIcon: PropTypes.bool.isRequired
+  isShowPromoIcon: PropTypes.bool.isRequired,
+  navigate: PropTypes.func.isRequired
 }
 
 const styles = StyleSheet.create({
