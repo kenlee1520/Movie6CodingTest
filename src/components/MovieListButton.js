@@ -18,7 +18,8 @@ export default class MovieListButton extends Component {
       movieName,
       favCount,
       commentCount,
-      openDate
+      openDate,
+      isShowPromoIcon
     } = this.props
     return (
       <View style={styles.wrapper}>
@@ -55,7 +56,8 @@ MovieListButton.propTypes = {
   movieName: PropTypes.string.isRequired,
   favCount: PropTypes.number,
   commentCount: PropTypes.number,
-  openDate: PropTypes.string
+  openDate: PropTypes.string,
+  isShowPromoIcon: PropTypes.bool.isRequired
 }
 
 const styles = StyleSheet.create({
