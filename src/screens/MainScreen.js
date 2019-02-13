@@ -36,7 +36,22 @@ export default class MainScreen extends Component {
           <Text style={styles.headerText}>電影</Text>
         </View>
         <ScrollView style={styles.contentContainer}>
-          <Text style={styles.headerText}>電影</Text>
+          <MovieListButton
+            thumbnail={'https://storage.hkmovie6.com/prod/movie/movies_47804-2018-12-21-074900862.jpg'}
+            ratingValue={3.5}
+            movieName={'銃夢：戰鬥天使'}
+            favCount={1996}
+            commentCount={257}
+            openDate={'2019/2/5'}
+          />
+          <MovieListButton
+            thumbnail={'https://storage.hkmovie6.com/prod/movie/movies_47804-2018-12-21-074900862.jpg'}
+            ratingValue={3.5}
+            movieName={'銃夢：戰鬥天使'}
+            favCount={1996}
+            commentCount={257}
+            openDate={'2019/2/5'}
+          />
         </ScrollView>
       </View>
     )
@@ -51,7 +66,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.black
   },
   headerContainer: {
-    height: 70,
+    height: 55,
     backgroundColor: colors.darkGrey,
     flexDirection: 'row',
     justifyContent: 'center',

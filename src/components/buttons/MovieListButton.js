@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
   ratingContainer: {
     flex: 6,
     justifyContent: 'center',
-    borderBottomColor: colors.white,
+    borderBottomColor: colors.lightGrey,
     borderBottomWidth: 0.2
   },
   counterContainer: {
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
   movieContainer: {
     flex: 17,
     justifyContent: 'center',
-    borderBottomColor: colors.white,
+    borderBottomColor: colors.lightGrey,
     borderBottomWidth: 0.2
   },
   movieName: {
