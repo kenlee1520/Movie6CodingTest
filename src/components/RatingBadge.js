@@ -11,18 +11,19 @@ import StarRating from 'react-native-star-rating'
 export default class RatingBadge extends Component {
   render () {
     const {
-      ratingValue
+      ratingValue,
+      ratingStar
     } = this.props
     return (
       <View style={styles.wrapper}>
         <View style={styles.ratingContainer}>
-          <Text style={styles.ratingText}>{ratingValue}</Text>
+          <Text style={styles.ratingText}>{this.props.ratingValue ? ratingValue : '- -'}</Text>
         </View>
         <View style={styles.ratingBar}>
           <StarRating
             disabled={true}
             maxStars={5}
-            rating={3.5}
+            rating={this.props.ratingValue ? ratingStar : 0}
             emptyStarColor={colors.yellow}
             halfStar={'star-half-full'}
             fullStarColor={colors.yellow}
@@ -35,7 +36,8 @@ export default class RatingBadge extends Component {
 }
 
 RatingBadge.propTypes = {
-  ratingValue: PropTypes.number.isRequired
+  ratingValue: PropTypes.number.isRequired,
+  ratingStar: PropTypes.number.isRequired
 }
 
 const styles = StyleSheet.create({

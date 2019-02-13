@@ -29,29 +29,31 @@ export default class MainScreen extends Component {
   }
 
   render () {
-    // const empty = null
+    var outputList = []
+    var key = 1
+    for (let movie of this.state.movieList) {
+      let ratingValue = Math.round((movie.rating / 100) * 10) / 10
+      outputList.push(
+        <MovieListButton
+          key={key}
+          thumbnail={movie.thumbnail}
+          ratingValue={ratingValue}
+          ratingStar={ratingValue}
+          movieName={movie.chiName}
+          favCount={movie.favCount}
+          commentCount={movie.commentCount}
+          openDate={movie.commentDate}
+        />
+      )
+      key++
+    }
     return (
       <View style={styles.wrapper}>
         <View style={styles.headerContainer}>
           <Text style={styles.headerText}>電影</Text>
         </View>
         <ScrollView style={styles.contentContainer}>
-          <MovieListButton
-            thumbnail={'https://storage.hkmovie6.com/prod/movie/movies_47804-2018-12-21-074900862.jpg'}
-            ratingValue={3.5}
-            movieName={'銃夢：戰鬥天使'}
-            favCount={1996}
-            commentCount={257}
-            openDate={'2019/2/5'}
-          />
-          <MovieListButton
-            thumbnail={'https://storage.hkmovie6.com/prod/movie/movies_47804-2018-12-21-074900862.jpg'}
-            ratingValue={3.5}
-            movieName={'銃夢：戰鬥天使'}
-            favCount={1996}
-            commentCount={257}
-            openDate={'2019/2/5'}
-          />
+          { outputList }
         </ScrollView>
       </View>
     )

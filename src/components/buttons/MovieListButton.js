@@ -16,6 +16,7 @@ export default class MovieListButton extends Component {
     const {
       thumbnail,
       ratingValue,
+      ratingStar,
       movieName,
       favCount,
       commentCount,
@@ -38,6 +39,7 @@ export default class MovieListButton extends Component {
         <View style={styles.ratingContainer}>
           <RatingBadge
             ratingValue={ratingValue}
+            ratingStar={ratingStar}
           />
         </View>
         <View style={styles.movieContainer}>
@@ -61,7 +63,8 @@ export default class MovieListButton extends Component {
 
 MovieListButton.propTypes = {
   thumbnail: PropTypes.string,
-  ratingValue: PropTypes.number,
+  ratingValue: PropTypes.number.isRequired,
+  ratingStar: PropTypes.number.isRequired,
   movieName: PropTypes.string,
   favCount: PropTypes.number,
   commentCount: PropTypes.number,
@@ -73,7 +76,8 @@ MovieListButton.propTypes = {
 const styles = StyleSheet.create({
   wrapper: {
     flexDirection: 'row',
-    backgroundColor: colors.black
+    backgroundColor: colors.black,
+    marginBottom: 2
   },
   thumbnailContainer: {
     flex: 5
