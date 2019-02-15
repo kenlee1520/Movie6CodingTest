@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   iconContainer: {
-    flex: 1,
+    flex: 2,
     justifyContent: 'center',
     alignItems: 'center'
   },
