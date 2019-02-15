@@ -9,7 +9,7 @@ import {
 import axios from 'axios'
 import RatingBadge from '../components/RatingBadge'
 import IconCounter from '../components/IconCounter'
-// import Header from '../components/Header'
+import Header from '../components/Header'
 import ViewMoreText from 'react-native-view-more-text'
 import {
   Table,
@@ -56,9 +56,7 @@ export default class DetailScreen extends Component {
   render () {
     return (
       <ScrollView style={styles.wrapper}>
-        <View style={styles.headerContainer}>
-          <Text style={styles.headerText}>movie detail</Text>
-        </View>
+        <Header headerText={'電影資訊'} />
         <View style={styles.slideshow}>
           <Text style={{ color: colors.white }}>slideshow</Text>
         </View>

@@ -7,6 +7,7 @@ import {
   ScrollView
 } from 'react-native'
 import axios from 'axios'
+import Header from '../components/Header'
 import MovieListButton from '../components/buttons/MovieListButton'
 
 export default class MainScreen extends Component {
@@ -109,9 +110,7 @@ export default class MainScreen extends Component {
     }
     return (
       <View style={styles.wrapper}>
-        <View style={styles.headerContainer}>
-          <Text style={styles.headerText}>電影</Text>
-        </View>
+        <Header headerText={'電影'} />
         <ScrollView style={styles.contentContainer}>
           { outputList }
         </ScrollView>
