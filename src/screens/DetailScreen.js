@@ -9,6 +9,7 @@ import {
 import axios from 'axios'
 import RatingBadge from '../components/RatingBadge'
 import IconCounter from '../components/IconCounter'
+import InfoDictTable from '../components/InfoDictTable'
 import Header from '../components/Header'
 import ViewMoreText from 'react-native-view-more-text'
 import {
@@ -97,11 +98,12 @@ export default class DetailScreen extends Component {
               香煙貿易集團賄賂海關一案，被告在開庭前突然棄保潛逃，重要証人許植堯〔張家輝 飾〕亦神秘失蹤。廉政公署總調查主任陳敬慈〔劉青雲 飾〕要在七天之內，翻查所有蛛絲馬跡；上級同時派出另一調查主任江雪兒〔林嘉欣 飾〕，趕赴澳洲遊說許植堯回港出庭作證。然而隨著死線日漸迫近，與案件有關的人相繼離奇死亡，線索亦逐一斷開… 原來許植堯的神秘身份才是案情關鍵！要揭開重重煙幕，才能抽出私煙買賣的幕後黑手！
             </Text>
           </ViewMoreText>
-          <View style={styles.movieInfoDict}>
-            <Table borderStyle={{ borderWidth: 1, borderColor: '#c8e1ff' }}>
-              <Rows data={this.state.tableData} flexArr={[1, 6.5]} textStyle={styles.text} />
-            </Table>
-          </View>
+          <InfoDictTable
+            cast={'劉青雲、張家輝、林嘉欣'}
+            language={'粵語'}
+            director={'麥兆輝'}
+            genre={'劇情'}
+          />
         </View>
       </ScrollView>
     )
