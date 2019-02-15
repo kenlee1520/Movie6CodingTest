@@ -4,6 +4,7 @@ import {
   StyleSheet,
   Text,
   View,
+  Image,
   ScrollView
 } from 'react-native'
 import axios from 'axios'
@@ -13,6 +14,7 @@ import InfoDictTable from '../components/InfoDictTable'
 import Header from '../components/Header'
 import ViewMoreText from 'react-native-view-more-text'
 import YouTube from 'react-native-youtube'
+import Swiper from 'react-native-swiper'
 
 export default class DetailScreen extends Component {
   constructor (props) {
@@ -22,8 +24,8 @@ export default class DetailScreen extends Component {
     }
   }
 
-  componentDidMount () {
-    axios.get('https://api.hkmovie6.com/hkm/movies/48853')
+  componentWillMount () {
+    axios.get('https://api.hkmovie6.com/hkm/movies/47804')
       .then(response => {
         console.log(response.data)
         this.setState({ movieDetail: response.data })
@@ -46,45 +48,84 @@ export default class DetailScreen extends Component {
   }
 
   render () {
+    var swiperElement = []
+    // for (let t of this.state.movieDetail.multitrailers) {
+    //   var vId = t.replace('https://www.youtube.com/watch?v=', '')
+    //   var trailerElement =
+    //     <YouTube
+    //       videoId={vId}
+    //       onReady={e => this.setState({ isReady: true })}
+    //       onChangeState={e => this.setState({ status: e.state })}
+    //       onChangeQuality={e => this.setState({ quality: e.quality })}
+    //       onError={e => this.setState({ error: e.error })}
+    //       style={{ height: 200 }}
+    //     />
+    //   swiperElement.push(trailerElement)
+    // }
+    // for (let s of this.state.movieDetail.screenShots) {
+    //   var screenshotElement =
+    //     <Image
+    //       source={{ uri: s }}
+    //       style={{ height: 200 }}
+    //     />
+    //   swiperElement.push(screenshotElement)
+    // }
+    let ratingValue = Math.round((this.state.movieDetail.rating / 100) * 10) / 10
+    const synopsis =
+      <Text style={{ color: colors.white }}>
+        {this.state.movieDetail.chiSynopsis}
+      </Text>
+    var chiInfoDict = []
+    for (let i in this.state.movieDetail.chiInfoDict) {
+      chiInfoDict.push(this.state.movieDetail.chiInfoDict[i])
+    }
+    var hello = 'hello'
+    console.log(hello)
+    console.log(chiInfoDict[1])
     return (
       <ScrollView style={styles.wrapper}>
         <Header headerText={'電影資訊'} />
-        <View style={styles.slideshow}>
-          <YouTube
-            apiKey='AIzaSyBgpTNUFAYxhYJa4UKbIuyeAJ1xp1u9Aa8'
-            videoId='QwdvQtZFBC0'
-            onReady={e => this.setState({ isReady: true })}
-            onChangeState={e => this.setState({ status: e.state })}
-            onChangeQuality={e => this.setState({ quality: e.quality })}
-            onError={e => this.setState({ error: e.error })}
-
-            style={{ alignSelf: 'stretch', height: 300 }}
-          />
+        <View style={styles.slideshowContainer}>
+          <Swiper
+            style={styles.slideshow}
+            showsButtons={false}
+            loop={false}
+            dotColor={'#262626'}
+            activeDotColor={'white'}
+          >
+            {swiperElement}
+          </Swiper>
         </View>
         <View style={styles.movieInfo}>
           <View style={styles.movieBasicInfo}>
             <RatingBadge
-              ratingValue={3}
-              ratingStar={3}
+              ratingValue={ratingValue}
+              ratingStar={ratingValue}
             />
             <View style={{ flex: 0.5, marginLeft: 10 }}>
-              <Text style={styles.movieName}>MovieName</Text>
+              <Text style={styles.movieName}>{this.state.movieDetail.chiName}</Text>
               <View style={{ flexDirection: 'row' }}>
                 <IconCounter
                   icon={'heart-o'}
-                  count={1520}
+                  count={this.state.movieDetail.favCount ? this.state.movieDetail.favCount : 0}
                 />
                 <IconCounter
                   icon={'comment-o'}
-                  count={520}
+                  count={this.state.movieDetail.commentCount ? this.state.movieDetail.commentCount : 0}
                 />
               </View>
               <View style={{ flexDirection: 'row' }}>
-                <Text style={styles.openDate}>2019/2/5</Text>
+                <Text style={styles.openDate}>
+                  2019/2/15
+                </Text>
                 <Text style={{ color: colors.yellow }}>|</Text>
-                <Text style={styles.duration}>114 分鐘</Text>
+                <Text style={styles.duration}>
+                  {chiInfoDict[4] ? chiInfoDict[4] : '- -'} 分鐘
+                </Text>
                 <Text style={{ color: colors.yellow }}>|</Text>
-                <Text style={styles.category}>IIA 級</Text>
+                <Text style={styles.category}>
+                  {chiInfoDict[2] ? chiInfoDict[2] : '- -'} 級
+                </Text>
               </View>
             </View>
           </View>
@@ -94,13 +135,11 @@ export default class DetailScreen extends Component {
             renderViewLess={this.renderViewLess}
             textStyle={styles.synopsis}
           >
-            <Text style={{ color: colors.white }}>
-              香煙貿易集團賄賂海關一案，被告在開庭前突然棄保潛逃，重要証人許植堯〔張家輝 飾〕亦神秘失蹤。廉政公署總調查主任陳敬慈〔劉青雲 飾〕要在七天之內，翻查所有蛛絲馬跡；上級同時派出另一調查主任江雪兒〔林嘉欣 飾〕，趕赴澳洲遊說許植堯回港出庭作證。然而隨著死線日漸迫近，與案件有關的人相繼離奇死亡，線索亦逐一斷開… 原來許植堯的神秘身份才是案情關鍵！要揭開重重煙幕，才能抽出私煙買賣的幕後黑手！
-            </Text>
+            {synopsis}
           </ViewMoreText>
           <InfoDictTable
-            cast={'劉青雲、張家輝、林嘉欣'}
-            language={'粵語'}
+            cast={'劉青雲、張家輝、林嘉欣劉青雲、張家輝、林嘉欣劉青雲、張家輝、林嘉欣劉青雲、張家輝、林嘉欣'}
+            language={chiInfoDict[1] ? chiInfoDict[1] : 'nor'}
             director={'麥兆輝'}
             genre={'劇情'}
           />
@@ -117,8 +156,9 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     backgroundColor: colors.black
   },
-  slideshow: {
-    flex: 1
+  slideshowContainer: {
+    flex: 1,
+    height: 200
   },
   movieInfo: {
     padding: 10

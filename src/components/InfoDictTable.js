@@ -35,10 +35,9 @@ export default class InfoDictTable extends Component {
   }
 
   render () {
-    console.log(this.state.director)
     return (
       <View style={styles.movieInfoDict}>
-        <Table borderStyle={{ borderWidth: 1, borderColor: '#c8e1ff' }}>
+        <Table borderStyle={{ borderWidth: 0, borderColor: 'transparent' }}>
           <Row data={this.state.cast} flexArr={[1, 6.5]} textStyle={styles.text} />
           <Row data={this.state.language} flexArr={[1, 6.5]} textStyle={styles.text} />
           <Row data={this.state.director} flexArr={[1, 6.5]} textStyle={styles.text} />
@@ -50,10 +49,10 @@ export default class InfoDictTable extends Component {
 }
 
 InfoDictTable.propTypes = {
-  cast: PropTypes.string,
-  language: PropTypes.string,
-  director: PropTypes.string,
-  genre: PropTypes.string
+  cast: PropTypes.string.isRequired,
+  language: PropTypes.string.isRequired,
+  director: PropTypes.string.isRequired,
+  genre: PropTypes.string.isRequired
 }
 
 const styles = StyleSheet.create({
@@ -61,7 +60,9 @@ const styles = StyleSheet.create({
     marginTop: 15
   },
   text: {
-    margin: 5,
+    marginTop: 5,
+    marginBottom: 5,
+    marginRight: 5,
     color: colors.white
   }
 })
