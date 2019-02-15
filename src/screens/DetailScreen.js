@@ -12,6 +12,7 @@ import IconCounter from '../components/IconCounter'
 import InfoDictTable from '../components/InfoDictTable'
 import Header from '../components/Header'
 import ViewMoreText from 'react-native-view-more-text'
+import YouTube from 'react-native-youtube'
 
 export default class DetailScreen extends Component {
   constructor (props) {
@@ -49,7 +50,16 @@ export default class DetailScreen extends Component {
       <ScrollView style={styles.wrapper}>
         <Header headerText={'電影資訊'} />
         <View style={styles.slideshow}>
-          <Text style={{ color: colors.white }}>slideshow</Text>
+          <YouTube
+            apiKey='AIzaSyBgpTNUFAYxhYJa4UKbIuyeAJ1xp1u9Aa8'
+            videoId='QwdvQtZFBC0'
+            onReady={e => this.setState({ isReady: true })}
+            onChangeState={e => this.setState({ status: e.state })}
+            onChangeQuality={e => this.setState({ quality: e.quality })}
+            onError={e => this.setState({ error: e.error })}
+
+            style={{ alignSelf: 'stretch', height: 300 }}
+          />
         </View>
         <View style={styles.movieInfo}>
           <View style={styles.movieBasicInfo}>
