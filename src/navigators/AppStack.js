@@ -22,6 +22,9 @@ const AppStackNavigator = createStackNavigator({
     //   }
     // })
   }
+},
+{
+  initialRouteName: 'MainScreen'
 })
 
 const AppStack = createAppContainer(AppStackNavigator)

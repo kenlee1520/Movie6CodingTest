@@ -70,7 +70,7 @@ MovieListButton.propTypes = {
   commentCount: PropTypes.number,
   openDate: PropTypes.string,
   // isShowPromoIcon: PropTypes.bool.isRequired,
-  navigate: PropTypes.func
+  navigate: PropTypes.func.isRequired
 }
 
 const styles = StyleSheet.create({

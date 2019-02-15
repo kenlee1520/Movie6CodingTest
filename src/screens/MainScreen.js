@@ -105,6 +105,9 @@ export default class MainScreen extends Component {
           favCount={movie.favCount}
           commentCount={movie.commentCount}
           openDate={openDate}
+          navigate={() => this.props.navigation.navigate('DetailScreen', {
+            movieId: movie.id
+          })}
         />
       )
     }

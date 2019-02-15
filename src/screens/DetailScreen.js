@@ -25,7 +25,7 @@ export default class DetailScreen extends Component {
   }
 
   componentWillMount () {
-    axios.get('https://api.hkmovie6.com/hkm/movies/47804')
+    axios.get('https://api.hkmovie6.com/hkm/movies/' + this.props.navigation.getParam('movieId'))
       .then(response => {
         console.log(response.data)
         this.setState({ movieDetail: response.data })
