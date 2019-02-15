@@ -12,22 +12,12 @@ import IconCounter from '../components/IconCounter'
 import InfoDictTable from '../components/InfoDictTable'
 import Header from '../components/Header'
 import ViewMoreText from 'react-native-view-more-text'
-import {
-  Table,
-  Rows
-} from 'react-native-table-component'
 
 export default class DetailScreen extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      movieDetail: '',
-      tableData: [
-        ['導演', '2'],
-        ['演員', 'b'],
-        ['類型', '2'],
-        ['語言', 'b']
-      ]
+      movieDetail: ''
     }
   }
 
@@ -68,7 +58,7 @@ export default class DetailScreen extends Component {
               ratingStar={3}
             />
             <View style={{ flex: 0.5, marginLeft: 10 }}>
-              <Text style={styles.movieName}>movieBasicInfo</Text>
+              <Text style={styles.movieName}>MovieName</Text>
               <View style={{ flexDirection: 'row' }}>
                 <IconCounter
                   icon={'heart-o'}
@@ -148,12 +138,8 @@ const styles = StyleSheet.create({
   synopsis: {
     marginTop: 15
   },
-  movieInfoDict: {
-    marginTop: 15
-  },
   renderViewText: {
     fontSize: 15,
     color: colors.yellow
-  },
-  text: { margin: 5, color: colors.white }
+  }
 })

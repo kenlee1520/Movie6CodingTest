@@ -10,13 +10,6 @@ import {
   Row
 } from 'react-native-table-component'
 
-// "Cast" : "Christoph Waltz, Jennifer Connelly, Mahershala Ali, Rosa Salazar",
-// "Category" : "IIA",
-// "Language" : "English",
-// "Director" : "Robert Rodriguez",
-// "Duration" : "122",
-// "Genre" : "Sci-Fi, Action"
-
 export default class InfoDictTable extends Component {
   constructor (props) {
     super(props)
