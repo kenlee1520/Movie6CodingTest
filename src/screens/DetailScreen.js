@@ -25,7 +25,8 @@ export default class DetailScreen extends Component {
   }
 
   componentWillMount () {
-    axios.get('https://api.hkmovie6.com/hkm/movies/' + this.props.navigation.getParam('movieId'))
+    console.log('will mount')
+    axios.get('https://api.hkmovie6.com/hkm/movies/47804')
       .then(response => {
         console.log(response.data)
         this.setState({ movieDetail: response.data })
@@ -33,6 +34,22 @@ export default class DetailScreen extends Component {
       .catch(error => {
         console.log(error)
       })
+  }
+
+  componentDidMount () {
+    console.log('did mount')
+  }
+
+  componentWillReceiveProps () {
+    console.log('will receive Prop')
+  }
+
+  componentWillUpdate (nextProps, nextState) {
+    console.log('--------- componentWillUpdate ---------')
+    console.log('will update')
+    console.log(nextProps)
+    console.log(nextState)
+    console.log('--------- componentWillUpdate ---------')
   }
 
   renderViewMore (onPress) {
@@ -79,9 +96,7 @@ export default class DetailScreen extends Component {
     for (let i in this.state.movieDetail.chiInfoDict) {
       chiInfoDict.push(this.state.movieDetail.chiInfoDict[i])
     }
-    var hello = 'hello'
-    console.log(hello)
-    console.log(chiInfoDict[1])
+    console.log('render')
     return (
       <ScrollView style={styles.wrapper}>
         <Header headerText={'電影資訊'} />
@@ -139,7 +154,7 @@ export default class DetailScreen extends Component {
           </ViewMoreText>
           <InfoDictTable
             cast={'劉青雲、張家輝、林嘉欣劉青雲、張家輝、林嘉欣劉青雲、張家輝、林嘉欣劉青雲、張家輝、林嘉欣'}
-            language={chiInfoDict[1] ? chiInfoDict[1] : 'nor'}
+            language={chiInfoDict[1] ? chiInfoDict[1] : 'no'}
             director={'麥兆輝'}
             genre={'劇情'}
           />
