@@ -14,19 +14,60 @@ export default class MainScreen extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      movieList: ''
+      movieList: '',
+      moviesId: [],
+      moviesChiName: [],
+      moviesRating: [],
+      moviesOpenDate: [],
+      moviesFavCount: [],
+      moviesCommentCount: [],
+      moviesThumbnail: []
     }
   }
 
-  componentDidMount () {
+  componentWillMount () {
+    console.log('componentWillMount')
     axios.get('https://api.hkmovie6.com/hkm/movies?type=showing')
       .then(response => {
         console.log(response.data)
+        for (let i in response.data) {
+          this.setState({
+            moviesId: [...this.state.moviesId, response.data[i].id],
+            moviesChiName: [...this.state.moviesChiName, response.data[i].chiName],
+            moviesRating: [...this.state.moviesRating, response.data[i].rating],
+            moviesOpenDate: [...this.state.moviesOpenDate, response.data[i].openDate],
+            moviesFavCount: [...this.state.moviesFavCount, response.data[i].favCount],
+            moviesCommentCount: [...this.state.moviesCommentCount, response.data[i].commentCount],
+            moviesThumbnail: [...this.state.moviesThumbnail, response.data[i].thumbnail]
+          })
+        }
         this.setState({ movieList: response.data })
       })
       .catch(error => {
         console.log(error)
       })
+  }
+
+  // componentWillUpdate (nextProps, nextState) {
+  //   console.log('--------- start componentWillUpdate ---------')
+  //   console.log('will update')
+  //   console.log(nextProps)
+  //   console.log(nextState)
+  //   console.log('--------- end componentWillUpdate ---------')
+  // }
+  //
+  // componentDidUpdate (prevProps, prevState) {
+  //   console.log('----------- start componentDidUpdate ------------')
+  //   console.log(prevProps)
+  //   console.log(prevState)
+  //   console.log('----------- end componentDidUpdate ------------')
+  // }
+
+  componentWillReceiveProps (nextProps) {
+    //   console.log('----------- start componentDidUpdate ------------')
+    //   console.log(prevProps)
+    //   console.log(prevState)
+    //   console.log('----------- end componentDidUpdate ------------')
   }
 
   _getMonth (month) {
@@ -91,22 +132,23 @@ export default class MainScreen extends Component {
   }
 
   render () {
+    console.log('render')
     var outputList = []
-    for (let movie of this.state.movieList) {
-      let ratingValue = Math.round((movie.rating / 100) * 10) / 10
-      let openDate = this._handleChiDate(movie.openDate)
+    for (let i in this.state.movieList) {
+      let ratingValue = Math.round((this.state.moviesRating[i] / 100) * 10) / 10
+      let openDate = this._handleChiDate(this.state.moviesOpenDate[i])
       outputList.push(
         <MovieListButton
-          key={movie.id}
-          thumbnail={movie.thumbnail}
+          key={i}
+          thumbnail={this.state.moviesThumbnail[i] ? this.state.moviesThumbnail[i] : 'https://hkmovie6.com/assets/hkm/images/logos/app-icon-168x168.png'}
           ratingValue={ratingValue}
           ratingStar={ratingValue}
-          movieName={movie.chiName}
-          favCount={movie.favCount}
-          commentCount={movie.commentCount}
+          movieName={this.state.moviesChiName[i]}
+          favCount={this.state.moviesFavCount[i]}
+          commentCount={this.state.moviesCommentCount[i]}
           openDate={openDate}
           navigate={() => this.props.navigation.navigate('DetailScreen', {
-            movieId: movie.id
+            movieId: this.state.moviesId[i]
           })}
         />
       )

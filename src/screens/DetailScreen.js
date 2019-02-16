@@ -26,7 +26,7 @@ export default class DetailScreen extends Component {
 
   componentWillMount () {
     console.log('will mount')
-    axios.get('https://api.hkmovie6.com/hkm/movies/47804')
+    axios.get('https://api.hkmovie6.com/hkm/movies/' + this.props.navigation.getParam('movieId'))
       .then(response => {
         console.log(response.data)
         this.setState({ movieDetail: response.data })
@@ -34,22 +34,6 @@ export default class DetailScreen extends Component {
       .catch(error => {
         console.log(error)
       })
-  }
-
-  componentDidMount () {
-    console.log('did mount')
-  }
-
-  componentWillReceiveProps () {
-    console.log('will receive Prop')
-  }
-
-  componentWillUpdate (nextProps, nextState) {
-    console.log('--------- componentWillUpdate ---------')
-    console.log('will update')
-    console.log(nextProps)
-    console.log(nextState)
-    console.log('--------- componentWillUpdate ---------')
   }
 
   renderViewMore (onPress) {
