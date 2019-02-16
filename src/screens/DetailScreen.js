@@ -43,11 +43,6 @@ export default class DetailScreen extends Component {
       })
   }
 
-  componentDidMount () {
-    console.log('componentDidMount')
-    // this.setState(this.state)
-  }
-
   renderViewMore (onPress) {
     return (
       <Text onPress={onPress} style={styles.renderViewText}>更多</Text>
@@ -62,47 +57,46 @@ export default class DetailScreen extends Component {
 
   render () {
     console.log('render')
-    console.log(this.state.chiInfoDict)
     var swiperElement = []
-    // for (let t of this.state.movieDetail.multitrailers) {
-    //   var vId = t.replace('https://www.youtube.com/watch?v=', '')
-    //   var trailerElement =
-    //     <YouTube
-    //       videoId={vId}
-    //       onReady={e => this.setState({ isReady: true })}
-    //       onChangeState={e => this.setState({ status: e.state })}
-    //       onChangeQuality={e => this.setState({ quality: e.quality })}
-    //       onError={e => this.setState({ error: e.error })}
-    //       style={{ height: 200 }}
-    //     />
-    //   swiperElement.push(trailerElement)
-    // }
-    // for (let s of this.state.movieDetail.screenShots) {
-    //   var screenshotElement =
-    //     <Image
-    //       source={{ uri: s }}
-    //       style={{ height: 200 }}
-    //     />
-    //   swiperElement.push(screenshotElement)
-    // }
-    let ratingValue = Math.round((this.state.movieDetail.rating / 100) * 10) / 10
-    var chiInfoDict = []
-    for (let i in this.state.movieDetail.chiInfoDict) {
-      chiInfoDict.push(this.state.movieDetail.chiInfoDict[i])
+    for (let i in this.state.movieDetail.multitrailers) {
+      var vId = this.state.movieDetail.multitrailers[i].replace('https://www.youtube.com/watch?v=', '')
+      var trailerElement =
+        <YouTube
+          key={`YouTube${i}`}
+          apiKey='AIzaSyBgpTNUFAYxhYJa4UKbIuyeAJ1xp1u9Aa8'
+          videoId={vId}
+          onReady={e => this.setState({ isReady: true })}
+          onChangeState={e => this.setState({ status: e.state })}
+          onChangeQuality={e => this.setState({ quality: e.quality })}
+          onError={e => this.setState({ error: e.error })}
+          style={{ height: 200 }}
+        />
+      swiperElement.push(trailerElement)
     }
-    // console.log(chiInfoDict)
+    for (let i in this.state.movieDetail.screenShots) {
+      var screenshotElement =
+        <Image
+          key={`Screenshots${i}`}
+          source={{ uri: this.state.movieDetail.screenShots[i] }}
+          style={{ height: 200 }}
+        />
+      swiperElement.push(screenshotElement)
+    }
+    let ratingValue = Math.round((this.state.movieDetail.rating / 100) * 10) / 10
+    const swiper =
+      <Swiper
+        style={styles.slideshow}
+        showsButtons={false}
+        loop={false}
+        dotColor={'#262626'}
+        activeDotColor={'white'}
+      >
+        {swiperElement}
+      </Swiper>
     return (
       <ScrollView style={styles.wrapper}>
         <View style={styles.slideshowContainer}>
-          <Swiper
-            style={styles.slideshow}
-            showsButtons={false}
-            loop={false}
-            dotColor={'#262626'}
-            activeDotColor={'white'}
-          >
-            {swiperElement}
-          </Swiper>
+          {swiperElement ? swiper : null}
         </View>
         <View style={styles.movieInfo}>
           <View style={styles.movieBasicInfo}>
