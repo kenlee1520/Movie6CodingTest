@@ -35,7 +35,6 @@ export default class InfoDictTable extends Component {
   }
 
   render () {
-    console.log('infodictable render')
     return (
       <View style={styles.movieInfoDict}>
         <Table borderStyle={{ borderWidth: 0, borderColor: 'transparent' }}>
