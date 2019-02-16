@@ -10,30 +10,42 @@ import {
 import axios from 'axios'
 import RatingBadge from '../components/RatingBadge'
 import IconCounter from '../components/IconCounter'
-import InfoDictTable from '../components/InfoDictTable'
-import Header from '../components/Header'
 import ViewMoreText from 'react-native-view-more-text'
 import YouTube from 'react-native-youtube'
 import Swiper from 'react-native-swiper'
+import {
+  Table,
+  Row
+} from 'react-native-table-component'
 
 export default class DetailScreen extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      movieDetail: ''
+      movieDetail: '',
+      chiInfoDict: ''
     }
   }
 
   componentWillMount () {
-    console.log('will mount')
+    console.log('componentWillMount')
     axios.get('https://api.hkmovie6.com/hkm/movies/' + this.props.navigation.getParam('movieId'))
       .then(response => {
         console.log(response.data)
-        this.setState({ movieDetail: response.data })
+        this.setState({
+          movieDetail: response.data,
+          chiInfoDict: response.data.chiInfoDict
+        })
+        this.setState(this.state)
       })
       .catch(error => {
         console.log(error)
       })
+  }
+
+  componentDidMount () {
+    console.log('componentDidMount')
+    // this.setState(this.state)
   }
 
   renderViewMore (onPress) {
@@ -49,6 +61,8 @@ export default class DetailScreen extends Component {
   }
 
   render () {
+    console.log('render')
+    console.log(this.state.chiInfoDict)
     var swiperElement = []
     // for (let t of this.state.movieDetail.multitrailers) {
     //   var vId = t.replace('https://www.youtube.com/watch?v=', '')
@@ -72,15 +86,11 @@ export default class DetailScreen extends Component {
     //   swiperElement.push(screenshotElement)
     // }
     let ratingValue = Math.round((this.state.movieDetail.rating / 100) * 10) / 10
-    const synopsis =
-      <Text style={{ color: colors.white }}>
-        {this.state.movieDetail.chiSynopsis}
-      </Text>
     var chiInfoDict = []
     for (let i in this.state.movieDetail.chiInfoDict) {
       chiInfoDict.push(this.state.movieDetail.chiInfoDict[i])
     }
-    console.log('render')
+    // console.log(chiInfoDict)
     return (
       <ScrollView style={styles.wrapper}>
         <View style={styles.slideshowContainer}>
@@ -114,33 +124,35 @@ export default class DetailScreen extends Component {
               </View>
               <View style={{ flexDirection: 'row' }}>
                 <Text style={styles.openDate}>
-                  {this.props.navigation.getParam('openDate') ? this.props.navigation.getParam('openDate') : '- -'}
+                  {this.props.navigation.getParam('openDate')}
                 </Text>
                 <Text style={{ color: colors.yellow }}>|</Text>
                 <Text style={styles.duration}>
-                  {chiInfoDict[4] ? chiInfoDict[4] : '- -'} 分鐘
+                  {this.state.chiInfoDict.片長} 分鐘
                 </Text>
                 <Text style={{ color: colors.yellow }}>|</Text>
                 <Text style={styles.category}>
-                  {chiInfoDict[2] ? chiInfoDict[2] : '- -'} 級
+                  {this.state.chiInfoDict.級別} 級
                 </Text>
               </View>
             </View>
           </View>
           <ViewMoreText
-            numberOfLines={4}
+            numberOfLines={3}
             renderViewMore={this.renderViewMore}
             renderViewLess={this.renderViewLess}
             textStyle={styles.synopsis}
           >
-            {synopsis}
+            {this.props.navigation.getParam('chiSynopsis')}
           </ViewMoreText>
-          <InfoDictTable
-            cast={'劉青雲、張家輝、林嘉欣劉青雲、張家輝、林嘉欣劉青雲、張家輝、林嘉欣劉青雲、張家輝、林嘉欣'}
-            language={chiInfoDict[1] ? chiInfoDict[1] : 'no'}
-            director={'麥兆輝'}
-            genre={'劇情'}
-          />
+          <View style={styles.movieInfoDict}>
+            <Table borderStyle={{ borderWidth: 1, borderColor: 'transparent' }}>
+              <Row data={['導演', this.state.chiInfoDict.導演]} flexArr={[1, 6.5]} textStyle={styles.tableText} />
+              <Row data={['演員', this.state.chiInfoDict.演員]} flexArr={[1, 6.5]} textStyle={styles.tableText} />
+              <Row data={['類型', this.state.chiInfoDict.類型]} flexArr={[1, 6.5]} textStyle={styles.tableText} />
+              <Row data={['語言', this.state.chiInfoDict.語言]} flexArr={[1, 6.5]} textStyle={styles.tableText} />
+            </Table>
+          </View>
         </View>
       </ScrollView>
     )
@@ -184,10 +196,17 @@ const styles = StyleSheet.create({
     marginLeft: 8
   },
   synopsis: {
-    marginTop: 15
+    marginTop: 15,
+    color: colors.white
   },
   renderViewText: {
     fontSize: 15,
     color: colors.yellow
+  },
+  tableText: {
+    marginTop: 5,
+    marginBottom: 5,
+    marginRight: 5,
+    color: colors.white
   }
 })
