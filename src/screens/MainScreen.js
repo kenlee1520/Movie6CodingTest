@@ -148,7 +148,8 @@ export default class MainScreen extends Component {
           commentCount={this.state.moviesCommentCount[i]}
           openDate={openDate}
           navigate={() => this.props.navigation.navigate('DetailScreen', {
-            movieId: this.state.moviesId[i]
+            movieId: this.state.moviesId[i],
+            openDate: openDate
           })}
         />
       )

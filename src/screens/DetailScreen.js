@@ -114,7 +114,7 @@ export default class DetailScreen extends Component {
               </View>
               <View style={{ flexDirection: 'row' }}>
                 <Text style={styles.openDate}>
-                  2019/2/15
+                  {this.props.navigation.getParam('openDate') ? this.props.navigation.getParam('openDate') : '- -'}
                 </Text>
                 <Text style={{ color: colors.yellow }}>|</Text>
                 <Text style={styles.duration}>
