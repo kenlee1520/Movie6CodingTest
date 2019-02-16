@@ -83,7 +83,6 @@ export default class DetailScreen extends Component {
     console.log('render')
     return (
       <ScrollView style={styles.wrapper}>
-        <Header headerText={'電影資訊'} />
         <View style={styles.slideshowContainer}>
           <Swiper
             style={styles.slideshow}
