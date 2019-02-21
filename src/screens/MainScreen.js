@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import colors from '../styles/colors'
 import {
   StyleSheet,
+  ActivityIndicator,
   Text,
   View,
   ScrollView
@@ -117,12 +118,18 @@ export default class MainScreen extends Component {
         />
       )
     }
+    const onActivityIndicator =
+      <View style={{ marginTop: 200 }}>
+        <ActivityIndicator size='large' color={colors.yellow} />
+      </View>
+    const content =
+      <ScrollView style={styles.contentContainer}>
+        { outputList }
+      </ScrollView>
     return (
       <View style={styles.wrapper}>
         <Header headerText={'電影'} />
-        <ScrollView style={styles.contentContainer}>
-          { outputList }
-        </ScrollView>
+        {this.state.movieList ? content : onActivityIndicator}
       </View>
     )
   }
@@ -134,13 +141,6 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     backgroundColor: colors.black
-  },
-  headerContainer: {
-    height: 100,
-    backgroundColor: colors.darkGrey,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center'
   },
   headerText: {
     fontSize: 15,
