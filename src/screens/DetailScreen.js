@@ -23,7 +23,8 @@ export default class DetailScreen extends Component {
     super(props)
     this.state = {
       movieDetail: '',
-      chiInfoDict: ''
+      chiInfoDict: '',
+      swiperElement: ''
     }
   }
 
@@ -36,11 +37,38 @@ export default class DetailScreen extends Component {
           movieDetail: response.data,
           chiInfoDict: response.data.chiInfoDict
         })
-        this.setState(this.state)
       })
       .catch(error => {
         console.log(error)
       })
+    for (let i in this.props.navigation.getParam('multitrailers')) {
+      var vId = this.props.navigation.getParam('multitrailers')[i].replace('https://www.youtube.com/watch?v=', '')
+      let trailerElement =
+        <YouTube
+          key={`YouTube${i}`}
+          apiKey='AIzaSyBgpTNUFAYxhYJa4UKbIuyeAJ1xp1u9Aa8'
+          videoId={vId}
+          onReady={e => this.setState({ isReady: true })}
+          onChangeState={e => this.setState({ status: e.state })}
+          onChangeQuality={e => this.setState({ quality: e.quality })}
+          onError={e => this.setState({ error: e.error })}
+          style={{ height: 200 }}
+        />
+      this.setState(prevState => ({
+        swiperElement: [...prevState.swiperElement, trailerElement]
+      }))
+    }
+    for (let i in this.props.navigation.getParam('screenShots')) {
+      let screenshotElement =
+        <Image
+          key={`Screenshots${i}`}
+          source={{ uri: this.props.navigation.getParam('screenShots')[i] }}
+          style={{ height: 200 }}
+        />
+      this.setState(prevState => ({
+        swiperElement: [...prevState.swiperElement, screenshotElement]
+      }))
+    }
   }
 
   renderViewMore (onPress) {
@@ -57,31 +85,6 @@ export default class DetailScreen extends Component {
 
   render () {
     console.log('render')
-    var swiperElement = []
-    for (let i in this.state.movieDetail.multitrailers) {
-      var vId = this.state.movieDetail.multitrailers[i].replace('https://www.youtube.com/watch?v=', '')
-      var trailerElement =
-        <YouTube
-          key={`YouTube${i}`}
-          apiKey='AIzaSyBgpTNUFAYxhYJa4UKbIuyeAJ1xp1u9Aa8'
-          videoId={vId}
-          onReady={e => this.setState({ isReady: true })}
-          onChangeState={e => this.setState({ status: e.state })}
-          onChangeQuality={e => this.setState({ quality: e.quality })}
-          onError={e => this.setState({ error: e.error })}
-          style={{ height: 200 }}
-        />
-      swiperElement.push(trailerElement)
-    }
-    for (let i in this.state.movieDetail.screenShots) {
-      var screenshotElement =
-        <Image
-          key={`Screenshots${i}`}
-          source={{ uri: this.state.movieDetail.screenShots[i] }}
-          style={{ height: 200 }}
-        />
-      swiperElement.push(screenshotElement)
-    }
     let ratingValue = Math.round((this.state.movieDetail.rating / 100) * 10) / 10
     const swiper =
       <Swiper
@@ -91,12 +94,12 @@ export default class DetailScreen extends Component {
         dotColor={'#262626'}
         activeDotColor={'white'}
       >
-        {swiperElement}
+        {this.state.swiperElement}
       </Swiper>
     return (
       <ScrollView style={styles.wrapper}>
         <View style={styles.slideshowContainer}>
-          {swiperElement ? swiper : null}
+          {this.state.swiperElement ? swiper : null}
         </View>
         <View style={styles.movieInfo}>
           <View style={styles.movieBasicInfo}>

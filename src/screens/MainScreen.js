@@ -110,7 +110,9 @@ export default class MainScreen extends Component {
           navigate={() => this.props.navigation.navigate('DetailScreen', {
             movieId: movie.id,
             openDate: openDate,
-            chiSynopsis: movie.chiSynopsis
+            chiSynopsis: movie.chiSynopsis,
+            multitrailers: movie.multitrailers,
+            screenShots: movie.screenShots
           })}
         />
       )
