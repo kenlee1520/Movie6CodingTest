@@ -10,6 +10,7 @@ import {
 } from 'react-native'
 import RatingBadge from '../RatingBadge'
 import IconCounter from '../IconCounter'
+import PromoIcon from '../PromoIcon'
 
 export default class MovieListButton extends Component {
   render () {
@@ -21,9 +22,15 @@ export default class MovieListButton extends Component {
       favCount,
       commentCount,
       openDate,
-      // isShowPromoIcon,
+      isShowPromoIcon,
       navigate
     } = this.props
+    const promoIconElement =
+      <View style={styles.promoIconContainer}>
+        <PromoIcon style={styles.promoIcon} />
+      </View>
+    const emptyPromoIcon =
+      <View style={styles.promoIconContainer} />
     return (
       <TouchableOpacity
         style={styles.wrapper}
@@ -56,6 +63,7 @@ export default class MovieListButton extends Component {
           </View>
           <Text style={styles.openDate}>{openDate}</Text>
         </View>
+        {isShowPromoIcon ? promoIconElement : emptyPromoIcon}
       </TouchableOpacity>
     )
   }
@@ -69,7 +77,7 @@ MovieListButton.propTypes = {
   favCount: PropTypes.number,
   commentCount: PropTypes.number,
   openDate: PropTypes.string,
-  // isShowPromoIcon: PropTypes.bool.isRequired,
+  isShowPromoIcon: PropTypes.bool,
   navigate: PropTypes.func.isRequired
 }
 
@@ -109,5 +117,11 @@ const styles = StyleSheet.create({
   openDate: {
     color: colors.lightGrey1,
     fontSize: 13
+  },
+  promoIconContainer: {
+    backgroundColor: colors.black,
+    position: 'absolute',
+    bottom: 1,
+    right: 0
   }
 })

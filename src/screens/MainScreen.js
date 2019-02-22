@@ -96,6 +96,7 @@ export default class MainScreen extends Component {
     console.log('render')
     var outputList = []
     for (let movie of this.state.movieList) {
+      console.log(movie.isShowPromoIcon)
       let ratingValue = Math.round((movie.rating / 100) * 10) / 10
       let openDate = this._handleChiDate(movie.openDate)
       outputList.push(
@@ -108,6 +109,7 @@ export default class MainScreen extends Component {
           favCount={movie.favCount}
           commentCount={movie.commentCount}
           openDate={openDate}
+          isShowPromoIcon={movie.isShowPromoIcon}
           navigate={() => this.props.navigation.navigate('DetailScreen', {
             movieId: movie.id,
             openDate: openDate,
