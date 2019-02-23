@@ -70,14 +70,14 @@ export default class MovieListButton extends Component {
 }
 
 MovieListButton.propTypes = {
-  thumbnail: PropTypes.string,
+  thumbnail: PropTypes.string.isRequired,
   ratingValue: PropTypes.string,
   ratingStar: PropTypes.number,
-  movieName: PropTypes.string,
-  favCount: PropTypes.number,
-  commentCount: PropTypes.number,
-  openDate: PropTypes.string,
-  isShowPromoIcon: PropTypes.bool,
+  movieName: PropTypes.string.isRequired,
+  favCount: PropTypes.number.isRequired,
+  commentCount: PropTypes.number.isRequired,
+  openDate: PropTypes.string.isRequired,
+  isShowPromoIcon: PropTypes.bool.isRequired,
   navigate: PropTypes.func.isRequired
 }
 
