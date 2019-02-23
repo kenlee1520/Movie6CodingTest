@@ -156,7 +156,7 @@ export default class MainScreen extends Component {
       </ScrollView>
     return (
       <View style={styles.wrapper}>
-        <Header headerText={'電影'} />
+        
         {this.state.movieList ? content : onActivityIndicator}
       </View>
     )

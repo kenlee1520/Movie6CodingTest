@@ -7,9 +7,19 @@ const AppStackNavigator = createStackNavigator({
   MainScreen: {
     screen: MainScreen,
     navigationOptions: ({ navigation }) => ({
+      title: '電影',
+      headerBackTitle: null,
       headerStyle: {
         elevation: 0,
-        height: 0
+        height: 80,
+        backgroundColor: colors.darkGrey
+      },
+      headerTitleStyle: {
+        fontSize: 15,
+        color: colors.white,
+        alignSelf: 'center',
+        textAlign: 'center',
+        flex: 1
       }
     })
   },
@@ -18,15 +28,13 @@ const AppStackNavigator = createStackNavigator({
     navigationOptions: ({ navigation }) => ({
       title: '電影資訊',
       headerStyle: {
-        elevation: 1,
-        height: 100,
+        elevation: 0,
+        height: 80,
         backgroundColor: colors.darkGrey
       },
       headerTitleStyle: {
         fontSize: 15,
-        color: colors.white,
-        textAlign: 'center',
-        alignSelf: 'center'
+        color: colors.white
       },
       headerTintColor: colors.white
     })

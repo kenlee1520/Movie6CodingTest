@@ -11,7 +11,6 @@ import axios from 'axios'
 import RatingBadge from '../components/RatingBadge'
 import IconCounter from '../components/IconCounter'
 import ViewMoreText from 'react-native-view-more-text'
-import YouTube from 'react-native-youtube'
 import Swiper from 'react-native-swiper'
 import {
   Table,
@@ -41,30 +40,15 @@ export default class DetailScreen extends Component {
       .catch(error => {
         console.log(error)
       })
-    for (let i in this.props.navigation.getParam('multitrailers')) {
-      var vId = this.props.navigation.getParam('multitrailers')[i].replace('https://www.youtube.com/watch?v=', '')
-      let trailerElement =
-        <YouTube
-          key={`YouTube${i}`}
-          apiKey='AIzaSyBgpTNUFAYxhYJa4UKbIuyeAJ1xp1u9Aa8'
-          videoId={vId}
-          onReady={e => this.setState({ isReady: true })}
-          onChangeState={e => this.setState({ status: e.state })}
-          onChangeQuality={e => this.setState({ quality: e.quality })}
-          onError={e => this.setState({ error: e.error })}
-          style={{ height: 200 }}
-        />
-      this.setState(prevState => ({
-        swiperElement: [...prevState.swiperElement, trailerElement]
-      }))
-    }
     for (let i in this.props.navigation.getParam('screenShots')) {
       let screenshotElement =
-        <Image
-          key={`Screenshots${i}`}
-          source={{ uri: this.props.navigation.getParam('screenShots')[i] }}
-          style={{ height: 200 }}
-        />
+        <View>
+          <Image
+            key={`Screenshots${i}`}
+            source={{ uri: this.props.navigation.getParam('screenShots')[i] }}
+            style={{ height: 200 }}
+          />
+        </View>
       this.setState(prevState => ({
         swiperElement: [...prevState.swiperElement, screenshotElement]
       }))
