@@ -45,7 +45,7 @@ export default class MovieListButton extends Component {
         <View style={{ flex: 1 }} />
         <View style={styles.ratingContainer}>
           <RatingBadge
-            ratingValue={ratingValue}
+            ratingValue={ratingValue ? ratingValue : '- -'}
             ratingStar={ratingStar}
           />
         </View>
@@ -71,8 +71,8 @@ export default class MovieListButton extends Component {
 
 MovieListButton.propTypes = {
   thumbnail: PropTypes.string,
-  ratingValue: PropTypes.number.isRequired,
-  ratingStar: PropTypes.number.isRequired,
+  ratingValue: PropTypes.string,
+  ratingStar: PropTypes.number,
   movieName: PropTypes.string,
   favCount: PropTypes.number,
   commentCount: PropTypes.number,

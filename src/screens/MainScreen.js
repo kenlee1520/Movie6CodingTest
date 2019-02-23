@@ -3,7 +3,6 @@ import colors from '../styles/colors'
 import {
   StyleSheet,
   ActivityIndicator,
-  Text,
   View,
   ScrollView
 } from 'react-native'
@@ -92,19 +91,46 @@ export default class MainScreen extends Component {
     return chiDate
   }
 
+  _handleRatingStar (rating) {
+    if (typeof rating === 'undefined') {
+      return 0
+    } else {
+      var temp = (parseInt(rating / 10)) / 10
+      if (temp % 0.5 === 0) {
+        return temp
+      } else {
+        var trimValue = Math.round((temp % 0.5) * 10) / 10
+        if ((temp - trimValue) % 1 === 0.5) {
+          return (temp - trimValue)
+        } else {
+          return (temp - trimValue + 0.5)
+        }
+      }
+    }
+  }
+
+  _handleRatingValue (rating) {
+    if (typeof rating === 'undefined') {
+      return '- -'
+    } else {
+      var tempRating = parseInt(rating / 10)
+      return (tempRating / 10).toFixed(1)
+    }
+  }
+
   render () {
     console.log('render')
     var outputList = []
     for (let movie of this.state.movieList) {
-      console.log(movie.isShowPromoIcon)
-      let ratingValue = Math.round((movie.rating / 100) * 10) / 10
+      let ratingValue = this._handleRatingValue(movie.rating)
+      let ratingStar = this._handleRatingStar(movie.rating)
       let openDate = this._handleChiDate(movie.openDate)
       outputList.push(
         <MovieListButton
           key={`movie-${movie.id}`}
           thumbnail={movie.thumbnail ? movie.thumbnail : 'https://hkmovie6.com/assets/hkm/images/logos/app-icon-168x168.png'}
           ratingValue={ratingValue}
-          ratingStar={ratingValue}
+          ratingStar={ratingStar}
           movieName={movie.chiName}
           favCount={movie.favCount}
           commentCount={movie.commentCount}

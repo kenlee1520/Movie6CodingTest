@@ -83,9 +83,36 @@ export default class DetailScreen extends Component {
     )
   }
 
+  _handleRatingStar (rating) {
+    if (typeof rating === 'undefined') {
+      return 0
+    } else {
+      var temp = (parseInt(rating / 10)) / 10
+      if (temp % 0.5 === 0) {
+        return temp
+      } else {
+        var trimValue = Math.round((temp % 0.5) * 10) / 10
+        if ((temp - trimValue) % 1 === 0.5) {
+          return (temp - trimValue)
+        } else {
+          return (temp - trimValue + 0.5)
+        }
+      }
+    }
+  }
+
+  _handleRatingValue (rating) {
+    if (typeof rating === 'undefined') {
+      return '- -'
+    } else {
+      var tempRating = parseInt(rating / 10)
+      return (tempRating / 10).toFixed(1)
+    }
+  }
+
   render () {
-    console.log('render')
-    let ratingValue = Math.round((this.state.movieDetail.rating / 100) * 10) / 10
+    let ratingValue = this._handleRatingValue(this.state.movieDetail.rating)
+    let ratingStar = this._handleRatingStar(this.state.movieDetail.rating)
     const swiper =
       <Swiper
         style={styles.slideshow}
@@ -105,7 +132,7 @@ export default class DetailScreen extends Component {
           <View style={styles.movieBasicInfo}>
             <RatingBadge
               ratingValue={ratingValue}
-              ratingStar={ratingValue}
+              ratingStar={ratingStar}
             />
             <View style={{ flex: 0.5, marginLeft: 10 }}>
               <Text style={styles.movieName}>{this.state.movieDetail.chiName}</Text>

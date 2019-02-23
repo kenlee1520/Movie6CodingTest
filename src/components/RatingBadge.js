@@ -17,7 +17,7 @@ export default class RatingBadge extends Component {
     return (
       <View style={styles.wrapper}>
         <View style={styles.ratingContainer}>
-          <Text style={styles.ratingText}>{this.props.ratingValue ? ratingValue : '- -'}</Text>
+          <Text style={styles.ratingText}>{ratingValue ? ratingValue : '- -'}</Text>
         </View>
         <View style={styles.ratingBar}>
           <StarRating
@@ -36,8 +36,8 @@ export default class RatingBadge extends Component {
 }
 
 RatingBadge.propTypes = {
-  ratingValue: PropTypes.number.isRequired,
-  ratingStar: PropTypes.number.isRequired
+  ratingValue: PropTypes.string,
+  ratingStar: PropTypes.number
 }
 
 const styles = StyleSheet.create({
